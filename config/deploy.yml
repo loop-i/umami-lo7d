@@ -17,8 +17,6 @@ servers:
 proxy:
   ssl: true
   host: umami.lo7d.de
-  healthcheck:
-    path: /
 
 registry:
   server: ghcr.io
