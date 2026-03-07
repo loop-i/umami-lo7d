@@ -13,10 +13,6 @@ proxy:
   ssl: true
   host: umami.lo7d.de
 
-registry:
-  server: docker.umami.is
-  username: ""
-
 builder:
   arch: arm64
 
