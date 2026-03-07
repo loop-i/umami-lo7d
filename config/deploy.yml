@@ -15,10 +15,14 @@ servers:
     - 100.112.248.60
 
 proxy:
-  ssl: true
+  ssl: false
   host: umami.lo7d.de
-  healthcheck:
-    path: /favicon.ico
+  app_port: 3000
+
+boot:
+  wait: 5
+
+deploy_timeout: 30
 
 registry:
   server: ghcr.io
