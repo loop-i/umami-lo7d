@@ -2,7 +2,7 @@
 service: umami
 
 # Name of the container image.
-image: docker.umami.is/umami-software/umami:postgresql-latest
+image: loop-i/umami-lo7d
 
 # Deploy to these servers.
 servers:
@@ -12,9 +12,20 @@ servers:
 proxy:
   ssl: true
   host: umami.lo7d.de
+  healthcheck:
+    path: /
+
+registry:
+  server: ghcr.io
+  username: loop-i
+  password:
+    - KAMAL_REGISTRY_PASSWORD
 
 builder:
   arch: arm64
+
+ssh:
+  user: deploy
 
 env:
   clear:
