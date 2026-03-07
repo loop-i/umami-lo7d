@@ -1,5 +1,28 @@
 # Umami Deployment with Kamal
 
+## TL;DR
+
+```bash
+# 1. Server: Hetzner CAX11 (ARM) + Docker + Tailscale
+ssh root@<VPS_IP>
+curl -fsSL https://get.docker.com | sh
+adduser deploy && usermod -aG docker deploy
+curl -fsSL https://tailscale.com/install.sh | sh
+tailscale up --operator=deploy
+
+# 2. Local: Clone app + configure
+git clone https://github.com/umami-software/umami.git app
+# Edit config/deploy.yml with your Tailscale IP
+
+# 3. Deploy
+kamal accessory boot db
+kamal deploy
+```
+
+**Cost**: ~€5/month (Hetzner CAX11) | **SSL**: Cloudflare "Full" | **Secrets**: Bitwarden CLI
+
+---
+
 This guide explains how to deploy Umami (or any Docker-based project) using Kamal, with a Tailscale-connected Hetzner ARM VPS, Cloudflare proxy, and Bitwarden for secrets management.
 
 ## Infrastructure Overview
