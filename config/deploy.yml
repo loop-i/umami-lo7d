@@ -4,6 +4,11 @@ service: umami
 # Name of the container image.
 image: loop-i/umami-lo7d
 
+builder:
+  arch: arm64
+  context: ./app
+  dockerfile: Dockerfile
+
 # Deploy to these servers.
 servers:
   web:
