@@ -1,0 +1,41 @@
+# Name of your application. Used to uniquely configure containers.
+service: umami
+
+# Name of the container image.
+image: docker.umami.is/umami-software/umami:postgresql-latest
+
+# Deploy to these servers.
+servers:
+  web:
+    - 100.112.248.60
+
+proxy:
+  ssl: true
+  host: umami.lo7d.de
+
+registry:
+  server: docker.umami.is
+  username: ""
+
+builder:
+  arch: arm64
+
+env:
+  clear:
+    PORT: 3000
+  secret:
+    - DATABASE_URL
+
+accessories:
+  db:
+    image: postgres:16-alpine
+    host: 100.112.248.60
+    port: 5432
+    env:
+      clear:
+        POSTGRES_DB: umami
+        POSTGRES_USER: umami
+      secret:
+        - POSTGRES_PASSWORD
+    volumes:
+      - /var/lib/umami/postgres:/var/lib/postgresql/data
