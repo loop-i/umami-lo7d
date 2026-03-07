@@ -17,6 +17,8 @@ servers:
 proxy:
   ssl: true
   host: umami.lo7d.de
+  healthcheck:
+    path: /favicon.ico
 
 registry:
   server: ghcr.io
