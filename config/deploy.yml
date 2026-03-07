@@ -4,6 +4,7 @@ service: umami
 # Name of the container image.
 image: loop-i/umami-lo7d
 
+# Build from local source (Umami code in ./app folder)
 builder:
   arch: arm64
   context: ./app
@@ -14,6 +15,8 @@ servers:
   web:
     - 100.112.248.60
 
+# Kamal proxy handles SSL termination and routing
+# Note: For Cloudflare, set SSL to "Full" (not "Strict")
 proxy:
   ssl: true
   host: umami.lo7d.de
@@ -21,21 +24,29 @@ proxy:
   healthcheck:
     path: /favicon.ico
 
+# Container registry (GHCR)
 registry:
   server: ghcr.io
   username: loop-i
   password:
     - KAMAL_REGISTRY_PASSWORD
 
+# SSH user for server access
 ssh:
   user: deploy
 
+# Environment variables
+# clear: values visible in logs/config
+# secret: pulled from .kamal/secrets (Bitwarden)
 env:
   clear:
     PORT: 3000
   secret:
     - DATABASE_URL
 
+# Accessories = additional containers (PostgreSQL)
+# Note: Use container name "umami-db" in DATABASE_URL, not "localhost"
+# The containers communicate via Docker network "kamal"
 accessories:
   db:
     image: postgres:16-alpine
