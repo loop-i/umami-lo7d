@@ -51,7 +51,7 @@ accessories:
   db:
     image: postgres:16-alpine
     host: 100.112.248.60
-    ports: []
+    port: []
     env:
       clear:
         POSTGRES_DB: umami
